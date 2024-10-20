@@ -15,8 +15,11 @@ jwt = JWTManager(app)
 @app.route('/api/sync', methods=['GET', 'PUT', 'POST'])
 @jwt_required()
 def sync():
+    print(f"{request.method=}")
     user_id = get_jwt_identity()
     users = os.environ['JWT_USERS'].split(',')
+
+    print(f"{user_id=}, {users=}")
     if user_id not in users:
         return jsonify({'status': 'error', 'message': 'Unauthorized!'}), 401
 

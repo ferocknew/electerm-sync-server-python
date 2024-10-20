@@ -1,0 +1,22 @@
+services:
+  electerm_sync_server_python:
+    container_name: electerm_sync_server_python
+    build: .
+    environment:
+      - TZ=Asia/Shanghai
+      - PYTHONUNBUFFERED=1
+      - JWT_SECRET=283hsdfye@!2@9oijnjSwda09
+      - JWT_USERS=username1,username2,xxxx,hhhh
+    env_file:
+      - ./.env
+    restart: "always"
+    ports:
+      - 7837:7837
+    volumes:
+      - ./data:/app/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1g"
+    extra_hosts:
+      - host.docker.internal:host-gateway
