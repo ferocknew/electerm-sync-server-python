@@ -1,4 +1,4 @@
 flask
 python-dotenv
 pylint
-flask_jwt_extended
+flask-jwt-extended

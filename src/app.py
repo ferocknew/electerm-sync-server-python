@@ -11,7 +11,8 @@ app.config['JWT_SECRET_KEY'] = os.environ['JWT_SECRET']
 app.config['JWT_IDENTITY_CLAIM'] = 'id'
 jwt = JWTManager(app)
 
-@app.route('/api/sync', methods=['GET', 'PUT'])
+
+@app.route('/api/sync', methods=['GET', 'PUT', 'POST'])
 @jwt_required()
 def sync():
     user_id = get_jwt_identity()
@@ -31,17 +32,18 @@ def sync():
 
     return jsonify({'status': 'error', 'message': 'Unsupported method!'}), 405
 
+
 @app.route('/test', methods=['GET'])
 def test():
     return 'ok'
 
 
 if __name__ == '__main__':
-  port = os.environ['PORT']
-  host = os.environ['HOST']
-  app.run(
-    host=host,
-    port=port,
-    debug=True,
-    load_dotenv=True
-  )
+    port = os.environ['PORT']
+    host = os.environ['HOST']
+    app.run(
+        host=host,
+        port=port,
+        debug=True,
+        load_dotenv=True
+    )
